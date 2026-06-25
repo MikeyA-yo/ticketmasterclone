@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Ticketmaster brand palette */
+  --color-tm-blue: #026cdf;
+  --color-tm-blue-dark: #024ddf;
+  --color-tm-blue-darker: #00308a;
+  --color-tm-ink: #1f262d;
+  --color-tm-ink-soft: #51545b;
+  --color-tm-line: #e3e6ea;
+  --color-tm-surface: #f4f5f7;
+  --color-tm-surface-2: #e9eaec;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --shadow-card: 0 1px 2px rgba(31, 38, 45, 0.06), 0 4px 14px rgba(31, 38, 45, 0.08);
+  --shadow-pop: 0 8px 30px rgba(31, 38, 45, 0.16);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #ffffff;
+  --foreground: #1f262d;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbars on horizontal carousels while keeping scroll/swipe */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
