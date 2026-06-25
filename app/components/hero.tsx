@@ -51,7 +51,7 @@ export default function Hero({ slides }: { slides: Event[] }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
 
-            <div className="relative mx-auto flex h-full max-w-[1320px] flex-col justify-end px-5 pb-14 lg:px-6 lg:pb-20">
+            <div className="relative mx-auto flex h-full max-w-[1320px] flex-col justify-end px-5 pb-20 lg:px-6 lg:pb-24">
               {slide.badge && (
                 <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white ring-1 ring-white/30 backdrop-blur">
                   <span className="h-1.5 w-1.5 rounded-full bg-white" />
@@ -86,38 +86,42 @@ export default function Hero({ slides }: { slides: Event[] }) {
           </div>
         ))}
 
-        {/* Prev / Next */}
-        <button
-          type="button"
-          onClick={() => go(index - 1)}
-          aria-label="Previous slide"
-          className="absolute left-3 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full bg-white/90 p-2.5 text-tm-ink shadow-pop transition hover:bg-white sm:grid"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        <button
-          type="button"
-          onClick={() => go(index + 1)}
-          aria-label="Next slide"
-          className="absolute right-3 top-1/2 hidden -translate-y-1/2 place-items-center rounded-full bg-white/90 p-2.5 text-tm-ink shadow-pop transition hover:bg-white sm:grid"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
-
-        {/* Dots */}
-        <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
-          {slides.map((s, i) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              aria-current={i === index}
-              className={`h-2 rounded-full transition-all ${
-                i === index ? "w-7 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
-              }`}
-            />
-          ))}
+        {/* Bottom control bar: dots (left) + arrows (right) — kept clear of the title */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-5">
+          <div className="mx-auto flex max-w-[1320px] items-center justify-between px-5 lg:px-6">
+            <div className="pointer-events-auto flex gap-2">
+              {slides.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  aria-current={i === index}
+                  className={`h-2 rounded-full transition-all ${
+                    i === index ? "w-7 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="pointer-events-auto hidden gap-2 sm:flex">
+              <button
+                type="button"
+                onClick={() => go(index - 1)}
+                aria-label="Previous slide"
+                className="grid place-items-center rounded-full bg-white/90 p-2.5 text-tm-ink shadow-pop transition hover:bg-white"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => go(index + 1)}
+                aria-label="Next slide"
+                className="grid place-items-center rounded-full bg-white/90 p-2.5 text-tm-ink shadow-pop transition hover:bg-white"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
