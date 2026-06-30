@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import type { Event } from "../lib/events";
+import { imageFor } from "../lib/events";
 import { ChevronLeft, ChevronRight, LocationIcon, CalendarIcon } from "./icons";
 
 export default function Hero({ slides }: { slides: Event[] }) {
@@ -41,15 +43,16 @@ export default function Hero({ slides }: { slides: Event[] }) {
             style={{ background: slide.gradient }}
             aria-hidden={i !== index}
           >
-            {/* texture + legibility scrims */}
-            <div
-              className="absolute inset-0 opacity-25 mix-blend-overlay"
-              style={{
-                backgroundImage:
-                  "radial-gradient(60% 80% at 80% 20%, rgba(255,255,255,0.5), transparent 60%), radial-gradient(50% 60% at 10% 90%, rgba(0,0,0,0.4), transparent 60%)",
-              }}
+            <Image
+              src={imageFor(slide)}
+              alt={slide.name}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+            {/* legibility scrim */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
 
             <div className="relative mx-auto flex h-full max-w-[1320px] flex-col justify-end px-5 pb-20 lg:px-6 lg:pb-24">
               {slide.badge && (

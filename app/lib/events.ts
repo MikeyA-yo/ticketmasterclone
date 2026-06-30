@@ -114,6 +114,22 @@ export const recentlyViewed: RecentItem[] = [
   { id: "rv3", name: "Olivia Rodrigo", gradient: g(3) },
 ];
 
+// Themed royalty-free image pool per category (downloaded to /public/images).
+// Reused across events by category — a stable hash of the id picks one for variety.
+const imagePool: Record<Category["key"], string[]> = {
+  concerts: ["/images/concert-1.jpg", "/images/concert-2.jpg", "/images/concert-3.jpg"],
+  sports: ["/images/sports-1.jpg", "/images/sports-2.jpg"],
+  "arts-theater": ["/images/theater-1.jpg", "/images/theater-2.jpg"],
+  family: ["/images/family-1.jpg"],
+};
+
+export function imageFor(event: Event): string {
+  const pool = imagePool[event.category];
+  let h = 0;
+  for (let i = 0; i < event.id.length; i++) h = (h + event.id.charCodeAt(i)) % 9973;
+  return pool[h % pool.length];
+}
+
 export const cities = [
   "New York, NY",
   "Los Angeles, CA",

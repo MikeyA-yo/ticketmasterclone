@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import type { Event } from "../../lib/events";
+import { imageFor } from "../../lib/events";
 
 export default function MobileHero({ slides }: { slides: Event[] }) {
   const [index, setIndex] = useState(0);
@@ -23,14 +25,15 @@ export default function MobileHero({ slides }: { slides: Event[] }) {
           style={{ background: slide.gradient }}
           aria-hidden={i !== index}
         >
-          <div
-            className="absolute inset-0 opacity-25 mix-blend-overlay"
-            style={{
-              backgroundImage:
-                "radial-gradient(60% 80% at 80% 15%, rgba(255,255,255,0.55), transparent 60%), radial-gradient(50% 60% at 5% 95%, rgba(0,0,0,0.5), transparent 60%)",
-            }}
+          <Image
+            src={imageFor(slide)}
+            alt={slide.name}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
           <div className="absolute inset-x-0 bottom-0 px-4 pb-6">
             {slide.badge && (

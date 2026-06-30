@@ -1,4 +1,6 @@
+import Image from "next/image";
 import type { Event } from "../lib/events";
+import { imageFor } from "../lib/events";
 import { LocationIcon } from "./icons";
 
 const badgeStyles: Record<NonNullable<Event["badge"]>, string> = {
@@ -28,14 +30,14 @@ export default function EventCard({
       }`}
     >
       <div className="relative aspect-[16/10] w-full" style={{ background: event.gradient }}>
-        <div
-          className="absolute inset-0 opacity-30 mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "radial-gradient(70% 90% at 75% 15%, rgba(255,255,255,0.6), transparent 55%)",
-          }}
+        <Image
+          src={imageFor(event)}
+          alt={event.name}
+          fill
+          sizes="(max-width: 768px) 70vw, 260px"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
         {event.badge && (
           <span

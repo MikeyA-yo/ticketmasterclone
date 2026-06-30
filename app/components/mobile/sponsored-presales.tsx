@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback } from "react";
+import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { MapPin, ChevronDown, ChevronLeft, ArrowRight } from "lucide-react";
 import type { Event } from "../../lib/events";
+import { imageFor } from "../../lib/events";
 import { MobileSectionHeading } from "./mobile-section";
 
 export default function SponsoredPresales({
@@ -40,14 +42,14 @@ export default function SponsoredPresales({
             {events.map((ev) => (
               <div key={ev.id} className="min-w-0 flex-[0_0_100%]">
                 <div className="relative h-56 w-full" style={{ background: ev.gradient }}>
-                  <div
-                    className="absolute inset-0 opacity-30 mix-blend-overlay"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(70% 90% at 75% 15%, rgba(255,255,255,0.6), transparent 55%)",
-                    }}
+                  <Image
+                    src={imageFor(ev)}
+                    alt={ev.name}
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
                   <span className="absolute bottom-3 left-3 rounded-md bg-purple-600 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                     Presale
                   </span>
