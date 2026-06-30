@@ -6,6 +6,7 @@ const badgeStyles: Record<NonNullable<Event["badge"]>, string> = {
   "Selling Fast": "bg-amber-500 text-white",
   Hot: "bg-rose-600 text-white",
   "Verified Resale": "bg-emerald-600 text-white",
+  Presale: "bg-purple-600 text-white",
 };
 
 export default function EventCard({

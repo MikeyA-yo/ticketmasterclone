@@ -95,33 +95,6 @@ export function CalendarIcon(props: IconProps) {
   );
 }
 
-export function TicketIcon(props: IconProps) {
-  return (
-    <svg {...base} aria-hidden {...props}>
-      <path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1.5a2 2 0 0 0 0 5V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.5a2 2 0 0 0 0-5Z" />
-      <path d="M14 6v12" strokeDasharray="1.5 2.5" />
-    </svg>
-  );
-}
-
-export function TagIcon(props: IconProps) {
-  return (
-    <svg {...base} aria-hidden {...props}>
-      <path d="M20.6 13.4 13 21l-9.5-9.5V4H11l9.6 9.4Z" />
-      <circle cx="8" cy="8" r="1.4" />
-    </svg>
-  );
-}
-
-export function BackspaceIcon(props: IconProps) {
-  return (
-    <svg {...base} aria-hidden {...props}>
-      <path d="M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7 6-7Z" />
-      <path d="M12 10l4 4M16 10l-4 4" />
-    </svg>
-  );
-}
-
 /* Category icons */
 export function ConcertsIcon(props: IconProps) {
   return (

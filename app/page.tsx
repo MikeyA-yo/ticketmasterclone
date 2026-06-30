@@ -7,7 +7,17 @@ import SiteFooter from "./components/site-footer";
 import MobileHeader from "./components/mobile/mobile-header";
 import MobileHero from "./components/mobile/mobile-hero";
 import MobileTabBar from "./components/mobile/mobile-tabbar";
-import { featured, justAnnounced, sports, forYou } from "./lib/events";
+import MobileRail from "./components/mobile/mobile-rail";
+import RecentlyViewed from "./components/mobile/recently-viewed";
+import SponsoredPresales from "./components/mobile/sponsored-presales";
+import {
+  featured,
+  justAnnounced,
+  sports,
+  forYou,
+  presales,
+  recentlyViewed,
+} from "./lib/events";
 
 export default function Home() {
   return (
@@ -26,14 +36,16 @@ export default function Home() {
         <SiteFooter />
       </div>
 
-      {/* Mobile app layout (below md) */}
-      <div className="flex min-h-screen flex-col bg-black pb-20 text-white md:hidden">
+      {/* Mobile app layout (below md) — dark top chrome, light content */}
+      <div className="flex min-h-screen flex-col bg-tm-surface pb-24 text-tm-ink md:hidden">
         <MobileHeader />
         <main className="flex-1">
           <MobileHero slides={featured} />
-          <EventRow title="Just For You" events={forYou} dark />
-          <EventRow title="Just Announced" events={justAnnounced} dark />
-          <EventRow title="Sports" events={sports} dark />
+          <MobileRail title="Just For You" events={forYou} />
+          <RecentlyViewed items={recentlyViewed} />
+          <SponsoredPresales events={presales} />
+          <MobileRail title="Just Announced" events={justAnnounced} />
+          <MobileRail title="Sports" events={sports} />
         </main>
         <MobileTabBar />
       </div>

@@ -1,28 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import type { ComponentType, SVGProps } from "react";
+import type { ComponentType } from "react";
 import {
-  SearchIcon,
-  HeartIcon,
-  TicketIcon,
-  TagIcon,
-  UserIcon,
-} from "../icons";
+  Search,
+  Heart,
+  Ticket,
+  Tag,
+  CircleUserRound,
+  type LucideProps,
+} from "lucide-react";
 
 type Tab = {
   key: string;
   label: string;
-  Icon: ComponentType<SVGProps<SVGSVGElement>>;
+  Icon: ComponentType<LucideProps>;
   badge?: number;
 };
 
 const tabs: Tab[] = [
-  { key: "discover", label: "Discover", Icon: SearchIcon },
-  { key: "for-you", label: "For You", Icon: HeartIcon },
-  { key: "my-tickets", label: "My Tickets", Icon: TicketIcon },
-  { key: "sell", label: "Sell", Icon: TagIcon },
-  { key: "account", label: "Account", Icon: UserIcon, badge: 1 },
+  { key: "discover", label: "Discover", Icon: Search },
+  { key: "for-you", label: "For You", Icon: Heart },
+  { key: "my-tickets", label: "My Tickets", Icon: Ticket },
+  { key: "sell", label: "Sell", Icon: Tag },
+  { key: "account", label: "Account", Icon: CircleUserRound, badge: 1 },
 ];
 
 export default function MobileTabBar() {
@@ -30,7 +31,7 @@ export default function MobileTabBar() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-black/95 pb-[env(safe-area-inset-bottom)] backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-black/5 bg-white/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
       aria-label="Primary"
     >
       <ul className="flex items-stretch">
@@ -42,8 +43,8 @@ export default function MobileTabBar() {
                 type="button"
                 onClick={() => setActive(key)}
                 aria-current={isActive ? "page" : undefined}
-                className={`flex w-full flex-col items-center gap-1 py-2.5 ${
-                  isActive ? "text-tm-blue" : "text-white/70"
+                className={`flex w-full flex-col items-center gap-1 py-2 ${
+                  isActive ? "text-tm-blue" : "text-tm-ink-soft"
                 }`}
               >
                 <span className="relative">

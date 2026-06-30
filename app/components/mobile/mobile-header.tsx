@@ -3,13 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Logo from "../logo";
-import {
-  SearchIcon,
-  LocationIcon,
-  CalendarIcon,
-  ChevronDown,
-  BackspaceIcon,
-} from "../icons";
+import { Search, MapPin, CalendarDays, ChevronDown, Delete } from "lucide-react";
 
 const pills = [
   { label: "Concerts", href: "/concerts" },
@@ -59,7 +53,7 @@ export default function MobileHeader() {
       {/* Location + Dates */}
       <div className="mt-3 flex items-stretch">
         <div className="flex flex-1 items-center gap-2.5">
-          <LocationIcon className="h-5 w-5 shrink-0 text-white" />
+          <MapPin className="h-5 w-5 shrink-0 text-white" />
           <div className="min-w-0 flex-1">
             <p className="text-[11px] font-bold uppercase tracking-wide text-white/55">
               Location
@@ -77,7 +71,7 @@ export default function MobileHeader() {
               aria-label="Clear location"
               className="shrink-0 text-white/60 hover:text-white"
             >
-              <BackspaceIcon className="h-5 w-5" />
+              <Delete className="h-5 w-5" />
             </button>
           )}
         </div>
@@ -85,14 +79,14 @@ export default function MobileHeader() {
         <div className="mx-3 w-px self-stretch bg-white/20" />
 
         <button type="button" className="flex items-center gap-2.5 text-left">
-          <CalendarIcon className="h-5 w-5 shrink-0 text-white" />
+          <CalendarDays className="h-5 w-5 shrink-0 text-white" />
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wide text-white/55">
               Dates
             </p>
             <p className="text-[15px] font-medium text-white">All Dates</p>
           </div>
-          <ChevronDown className="h-5 w-5 text-white/70" />
+          <ChevronDown className="h-5 w-5 shrink-0 text-white/70" />
         </button>
       </div>
 
@@ -113,7 +107,7 @@ export default function MobileHeader() {
             className="w-full bg-transparent text-[15px] text-tm-ink outline-none placeholder:text-tm-ink-soft"
           />
         </span>
-        <SearchIcon className="h-6 w-6 shrink-0 text-tm-blue" />
+        <Search className="h-6 w-6 shrink-0 text-tm-blue" />
       </form>
 
       {/* Category pills */}

@@ -7,7 +7,7 @@ export type Event = {
   city: string;
   category: Category["key"];
   gradient: string;
-  badge?: "Just Announced" | "Selling Fast" | "Hot" | "Verified Resale";
+  badge?: "Just Announced" | "Selling Fast" | "Hot" | "Verified Resale" | "Presale";
 };
 
 export type Category = {
@@ -98,6 +98,20 @@ export const forYou: Event[] = [
   { id: "fy4", name: "Wicked", subtitle: "Broadway", date: "Now Playing · Nightly", venue: "Gershwin Theatre", city: "New York, NY", category: "arts-theater", gradient: g(8), badge: "Selling Fast" },
   { id: "fy5", name: "Dua Lipa", subtitle: "Radical Optimism Tour", date: "Thu · Jul 9 · 8:00 PM", venue: "Wells Fargo Center", city: "Philadelphia, PA", category: "concerts", gradient: g(1) },
   { id: "fy6", name: "Hans Zimmer Live", date: "Sun · May 24 · 7:30 PM", venue: "Hollywood Bowl", city: "Los Angeles, CA", category: "arts-theater", gradient: g(9) },
+];
+
+export const presales: Event[] = [
+  { id: "ps1", name: "Santana & The Doobie Brothers", subtitle: "Oneness Tour 2026", date: "Thu · Aug 13 · 7:00 PM", venue: "Hollywood Bowl", city: "Hollywood, CA", category: "concerts", gradient: g(3), badge: "Presale" },
+  { id: "ps2", name: "Foo Fighters", subtitle: "Everything Or Nothing At All", date: "Sat · Sep 19 · 7:30 PM", venue: "BMO Stadium", city: "Los Angeles, CA", category: "concerts", gradient: g(8), badge: "Presale" },
+  { id: "ps3", name: "Tyler, The Creator", subtitle: "Chromakopia: The World Tour", date: "Tue · Oct 7 · 8:00 PM", venue: "Crypto.com Arena", city: "Los Angeles, CA", category: "concerts", gradient: g(5), badge: "Presale" },
+];
+
+export type RecentItem = { id: string; name: string; gradient: string };
+
+export const recentlyViewed: RecentItem[] = [
+  { id: "rv1", name: "Ariana Grande", gradient: g(7) },
+  { id: "rv2", name: "Drake", gradient: g(5) },
+  { id: "rv3", name: "Olivia Rodrigo", gradient: g(3) },
 ];
 
 export const cities = [
