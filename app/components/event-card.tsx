@@ -8,7 +8,13 @@ const badgeStyles: Record<NonNullable<Event["badge"]>, string> = {
   "Verified Resale": "bg-emerald-600 text-white",
 };
 
-export default function EventCard({ event }: { event: Event }) {
+export default function EventCard({
+  event,
+  dark = false,
+}: {
+  event: Event;
+  dark?: boolean;
+}) {
   // Derive a short day/month chip from the date string (e.g. "Fri · Aug 14 · …")
   const parts = event.date.split("·").map((p) => p.trim());
   const dayMonth = parts.length >= 2 ? parts[1] : event.date;
@@ -16,7 +22,9 @@ export default function EventCard({ event }: { event: Event }) {
   return (
     <a
       href="#"
-      className="group flex w-[230px] shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-tm-line bg-white shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-pop sm:w-[260px]"
+      className={`group flex w-[230px] shrink-0 snap-start flex-col overflow-hidden rounded-xl border shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-pop sm:w-[260px] ${
+        dark ? "border-white/10 bg-[#15171a]" : "border-tm-line bg-white"
+      }`}
     >
       <div className="relative aspect-[16/10] w-full" style={{ background: event.gradient }}>
         <div
@@ -48,10 +56,22 @@ export default function EventCard({ event }: { event: Event }) {
 
       <div className="flex flex-1 flex-col gap-1 p-3.5">
         {event.subtitle && (
-          <p className="line-clamp-1 text-sm font-medium text-tm-ink">{event.subtitle}</p>
+          <p
+            className={`line-clamp-1 text-sm font-medium ${
+              dark ? "text-white" : "text-tm-ink"
+            }`}
+          >
+            {event.subtitle}
+          </p>
         )}
-        <p className="text-sm text-tm-ink-soft">{event.date}</p>
-        <p className="mt-1 flex items-start gap-1 text-sm text-tm-ink-soft">
+        <p className={`text-sm ${dark ? "text-white/60" : "text-tm-ink-soft"}`}>
+          {event.date}
+        </p>
+        <p
+          className={`mt-1 flex items-start gap-1 text-sm ${
+            dark ? "text-white/60" : "text-tm-ink-soft"
+          }`}
+        >
           <LocationIcon className="mt-0.5 h-4 w-4 shrink-0 opacity-70" />
           <span className="line-clamp-1">
             {event.venue} · {event.city}
