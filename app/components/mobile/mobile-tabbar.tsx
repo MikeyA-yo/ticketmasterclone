@@ -17,14 +17,16 @@ type Tab = {
   label: string;
   Icon: ComponentType<LucideProps>;
   badge?: number;
+  /** fill the icon when this tab is active (e.g. the heart) */
+  activeFill?: boolean;
 };
 
 const tabs: Tab[] = [
   { href: "/", label: "Discover", Icon: Search },
-  { href: "/for-you", label: "For You", Icon: Heart },
+  { href: "/for-you", label: "For You", Icon: Heart, activeFill: true },
   { href: "/my-tickets", label: "My Tickets", Icon: Ticket },
   { href: "/sell", label: "Sell", Icon: Tag },
-  { href: "/account", label: "Account", Icon: CircleUserRound, badge: 1 },
+  { href: "/account", label: "Account", Icon: CircleUserRound, badge: 1, activeFill: true },
 ];
 
 export default function MobileTabBar() {
@@ -36,7 +38,7 @@ export default function MobileTabBar() {
       aria-label="Primary"
     >
       <ul className="flex items-stretch">
-        {tabs.map(({ href, label, Icon, badge }) => {
+        {tabs.map(({ href, label, Icon, badge, activeFill }) => {
           const isActive =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
           return (
@@ -49,7 +51,10 @@ export default function MobileTabBar() {
                 }`}
               >
                 <span className="relative">
-                  <Icon className="h-6 w-6" />
+                  <Icon
+                    className="h-6 w-6"
+                    fill={isActive && activeFill ? "currentColor" : "none"}
+                  />
                   {badge ? (
                     <span className="absolute -right-2 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-600 px-1 text-[10px] font-bold text-white">
                       {badge}
