@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Logo from "../logo";
 import { Search, MapPin, CalendarDays, ChevronDown, Delete } from "lucide-react";
+import FlagUS from "./flag-us";
 
 const pills = [
   { label: "Concerts", href: "/concerts" },
@@ -12,27 +13,6 @@ const pills = [
   { label: "Family", href: "/family" },
   { label: "Cities", href: "/cities" },
 ];
-
-function FlagUS() {
-  return (
-    <svg
-      viewBox="0 0 24 16"
-      aria-label="United States"
-      className="h-5 w-7 overflow-hidden rounded-[3px] ring-1 ring-white/30"
-    >
-      <rect width="24" height="16" fill="#B22234" />
-      <g fill="#fff">
-        <rect y="1.85" width="24" height="1.23" />
-        <rect y="4.31" width="24" height="1.23" />
-        <rect y="6.77" width="24" height="1.23" />
-        <rect y="9.23" width="24" height="1.23" />
-        <rect y="11.69" width="24" height="1.23" />
-        <rect y="14.15" width="24" height="1.23" />
-      </g>
-      <rect width="10.5" height="8.62" fill="#3C3B6E" />
-    </svg>
-  );
-}
 
 export default function MobileHeader() {
   const [location, setLocation] = useState("Los Angeles, CA");
@@ -46,7 +26,7 @@ export default function MobileHeader() {
           <Logo variant="white" withIcon={false} />
         </Link>
         <button type="button" className="absolute right-0" aria-label="Region">
-          <FlagUS />
+          <FlagUS className="h-5 w-7 rounded-[3px] ring-1 ring-white/30" />
         </button>
       </div>
 

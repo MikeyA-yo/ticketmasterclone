@@ -37,7 +37,7 @@ export default function Home() {
       </div>
 
       {/* Mobile app layout (below md) — dark top chrome, light content */}
-      <div className="flex min-h-screen flex-col bg-tm-surface pb-24 text-tm-ink md:hidden">
+      <div className="mx-auto flex min-h-screen w-full max-w-[600px] flex-col bg-tm-surface pb-24 text-tm-ink md:hidden">
         <MobileHeader />
         <main className="flex-1">
           <MobileHero slides={featured} />
