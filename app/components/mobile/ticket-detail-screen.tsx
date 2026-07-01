@@ -14,7 +14,7 @@ import {
   type LucideProps,
 } from "lucide-react";
 import type { ComponentType } from "react";
-import { myOrder, type Seat } from "../../lib/tickets";
+import { type Seat, type TicketOrder } from "../../lib/tickets";
 
 function SeatCard({ seat }: { seat: Seat }) {
   return (
@@ -55,14 +55,14 @@ function OptionRow({ icon: Icon, label }: { icon: ComponentType<LucideProps>; la
   );
 }
 
-export default function TicketDetailScreen() {
+export default function TicketDetailScreen({ order }: { order: TicketOrder }) {
   const router = useRouter();
   const [tab, setTab] = useState<"tickets" | "extras">("tickets");
-  const { event, seats, transferStatus } = myOrder;
+  const { event, seats, transferStatus } = order;
 
   const goBack = () => {
     if (typeof window !== "undefined" && window.history.length > 1) router.back();
-    else router.push("/");
+    else router.push("/my-tickets");
   };
 
   return (
