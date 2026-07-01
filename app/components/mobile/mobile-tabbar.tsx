@@ -24,7 +24,7 @@ type Tab = {
 const tabs: Tab[] = [
   { href: "/", label: "Discover", Icon: Search },
   { href: "/for-you", label: "For You", Icon: Heart, activeFill: true },
-  { href: "/my-tickets", label: "My Tickets", Icon: Ticket },
+  { href: "/my-tickets", label: "My Events", Icon: Ticket },
   { href: "/sell", label: "Sell", Icon: Tag },
   { href: "/account", label: "Account", Icon: CircleUserRound, badge: 1, activeFill: true },
 ];
