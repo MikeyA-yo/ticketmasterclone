@@ -24,7 +24,7 @@ export const myOrder: TicketOrder = {
     date: "MON • AUG 03, 2026 • 8:00 PM",
     venue: "United Center",
     city: "Chicago, IL",
-    image: "/images/fav-1.jpg",
+    image: "/images/ariana.jpg",
     count: 32,
   },
   seats: [
