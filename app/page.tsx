@@ -10,16 +10,13 @@ import MobileTabBar from "./components/mobile/mobile-tabbar";
 import MobileRail from "./components/mobile/mobile-rail";
 import RecentlyViewed from "./components/mobile/recently-viewed";
 import SponsoredPresales from "./components/mobile/sponsored-presales";
-import {
-  featured,
-  justAnnounced,
-  sports,
-  forYou,
-  presales,
-  recentlyViewed,
-} from "./lib/events";
+import { recentlyViewed } from "./lib/events";
+import { getHomeSections } from "./lib/discovery";
 
-export default function Home() {
+export default async function Home() {
+  const { featured, justAnnounced, sports, forYou, presales } =
+    await getHomeSections();
+
   return (
     <>
       {/* Web / tablet layout (md and up) */}

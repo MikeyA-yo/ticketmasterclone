@@ -7,7 +7,11 @@ export type Event = {
   city: string;
   category: Category["key"];
   gradient: string;
-  badge?: "Just Announced" | "Selling Fast" | "Hot" | "Verified Resale" | "Presale";
+  badge?: "Just Announced" | "Selling Fast" | "Hot" | "Verified Resale" | "Presale" | "On Sale";
+  /** Absolute image URL from a live source (e.g. Discovery API). Falls back to the local pool. */
+  image?: string;
+  /** Deep link to the real event page, when sourced live. */
+  url?: string;
 };
 
 export type Category = {
@@ -124,6 +128,7 @@ const imagePool: Record<Category["key"], string[]> = {
 };
 
 export function imageFor(event: Event): string {
+  if (event.image) return event.image;
   const pool = imagePool[event.category];
   let h = 0;
   for (let i = 0; i < event.id.length; i++) h = (h + event.id.charCodeAt(i)) % 9973;
