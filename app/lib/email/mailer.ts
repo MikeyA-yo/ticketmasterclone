@@ -1,6 +1,7 @@
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import nodemailer, { type Transporter } from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import type { TicketOrder } from "../tickets";
 import { buildTicketEmailHtml, buildTicketEmailText } from "./ticket-email";
 
@@ -12,12 +13,18 @@ async function createTransporter(): Promise<Transporter> {
   // Real SMTP when configured via env (e.g. Gmail, SendGrid, Mailgun, SES…)
   if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
     const port = Number(SMTP_PORT) || 587;
-    return nodemailer.createTransport({
+    const options: SMTPTransport.Options & { family?: number } = {
       host: SMTP_HOST,
       port,
       secure: port === 465,
       auth: { user: SMTP_USER, pass: SMTP_PASS },
-    });
+      family: 4, // force IPv4 — many machines have no IPv6 route (ENETUNREACH)
+      // fail fast instead of hanging ~2min if outbound SMTP is blocked
+      connectionTimeout: 10_000,
+      greetingTimeout: 10_000,
+      socketTimeout: 15_000,
+    };
+    return nodemailer.createTransport(options);
   }
 
   // Dev fallback: Ethereal test inbox. Nothing is delivered to a real
@@ -34,6 +41,18 @@ async function createTransporter(): Promise<Transporter> {
 function getTransporter(): Promise<Transporter> {
   if (!transporterPromise) transporterPromise = createTransporter();
   return transporterPromise;
+}
+
+/** Test the SMTP connection + auth without sending an email. */
+export async function verifyTransport(): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const transporter = await getTransporter();
+    await transporter.verify();
+    return { ok: true };
+  } catch (err) {
+    transporterPromise = null; // allow a later retry
+    return { ok: false, error: err instanceof Error ? err.message : "verify failed" };
+  }
 }
 
 export type SendResult = {

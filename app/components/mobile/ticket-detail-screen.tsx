@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import type { ComponentType } from "react";
 import { type Seat, type TicketOrder } from "../../lib/tickets";
+import EmailTicket from "./email-ticket";
 
 function SeatCard({ seat }: { seat: Seat }) {
   return (
@@ -173,6 +174,7 @@ export default function TicketDetailScreen({ order }: { order: TicketOrder }) {
             More Options
           </h3>
           <div className="divide-y divide-tm-line overflow-hidden rounded-lg border border-tm-line bg-white">
+            <EmailTicket orderId={order.id} />
             <OptionRow icon={Wallet} label="Add to Apple Wallet" />
             <OptionRow icon={Info} label="View Event Details" />
           </div>
