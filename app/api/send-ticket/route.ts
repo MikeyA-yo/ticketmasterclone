@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getOrder, orders } from "../../lib/tickets";
+import { getOrderById, listOrders } from "../../lib/db/orders";
 import { buildTicketEmailHtml } from "../../lib/email/ticket-email";
 import { sendTicketEmail, verifyTransport } from "../../lib/email/mailer";
 
@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const id = request.nextUrl.searchParams.get("orderId") ?? orders[0].id;
-  const order = getOrder(id);
+  const id = sp.get("orderId") ?? (await listOrders())[0]?.id;
+  const order = id ? await getOrderById(id) : undefined;
   if (!order) {
     return new NextResponse("Order not found", { status: 404 });
   }
@@ -44,8 +44,8 @@ export async function POST(request: NextRequest) {
     // allow empty body → defaults
   }
 
-  const id = body.orderId ?? orders[0].id;
-  const order = getOrder(id);
+  const id = body.orderId ?? (await listOrders())[0]?.id;
+  const order = id ? await getOrderById(id) : undefined;
   if (!order) {
     return NextResponse.json({ ok: false, error: "Order not found" }, { status: 404 });
   }

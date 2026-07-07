@@ -3,6 +3,7 @@ export type Seat = {
   section: string;
   row: string;
   seat: string;
+  price?: number;
 };
 
 export type TicketOrder = {
@@ -26,15 +27,15 @@ export const orders: TicketOrder[] = [
     status: "upcoming",
     event: {
       name: "Ariana Grande - The Eternal Sunshine Tour",
-      date: "MON, JUL 13, 2026 • 8:00 PM",
-      venue: "Barclays Center",
-      city: "Brooklyn, NY",
+      date: "THU, JUL 23, 2026 • 8:00 PM",
+      venue: "TD Garden",
+      city: "Boston, MA",
       image: "/images/ariana.jpg",
       count: 32,
     },
     seats: [
-      { type: "Artist Presale", section: "228", row: "10", seat: "3" },
-      { type: "Artist Presale", section: "228", row: "10", seat: "4" },
+      { type: "Verified Resale Ticket", section: "BAL313", row: "14", seat: "6", price: 805 },
+      { type: "Verified Resale Ticket", section: "BAL313", row: "14", seat: "7", price: 805 },
     ],
     transferStatus: "Transfer Accepted",
   },

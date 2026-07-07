@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { orders } from "../../lib/tickets";
+import type { TicketOrder } from "../../lib/tickets";
 import EventTicketCard from "./event-ticket-card";
 import FlagUS from "./flag-us";
 
@@ -10,7 +10,7 @@ const tabs = [
   { key: "past" as const, label: "Past" },
 ];
 
-export default function MyEventsListScreen() {
+export default function MyEventsListScreen({ orders }: { orders: TicketOrder[] }) {
   const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
   const list = orders.filter((o) => o.status === tab);
 
