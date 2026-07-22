@@ -9,6 +9,8 @@ export type Seat = {
 export type TicketOrder = {
   id: string;
   status: "upcoming" | "past";
+  /** Display order reference, e.g. "75-19711/NY2" (rendered as "Order #…"). */
+  orderNumber?: string;
   event: {
     name: string;
     date: string;
@@ -25,6 +27,7 @@ export const orders: TicketOrder[] = [
   {
     id: "ariana-eternal-sunshine",
     status: "upcoming",
+    orderNumber: "75-19711/NY2",
     event: {
       name: "Ariana Grande - The Eternal Sunshine Tour",
       date: "THU, JUL 23, 2026 • 8:00 PM",
@@ -42,6 +45,7 @@ export const orders: TicketOrder[] = [
   {
     id: "coldplay-spheres",
     status: "past",
+    orderNumber: "68-40233/NJ1",
     event: {
       name: "Coldplay - Music of the Spheres",
       date: "SAT • SEP 14, 2025 • 7:00 PM",
@@ -55,6 +59,7 @@ export const orders: TicketOrder[] = [
   {
     id: "lakers-celtics",
     status: "past",
+    orderNumber: "71-55820/CA3",
     event: {
       name: "Lakers vs. Celtics",
       date: "FRI • JAN 17, 2025 • 5:30 PM",
@@ -71,6 +76,7 @@ export const orders: TicketOrder[] = [
   {
     id: "hamilton",
     status: "past",
+    orderNumber: "63-10947/NY1",
     event: {
       name: "Hamilton",
       date: "WED • NOV 6, 2024 • 7:30 PM",

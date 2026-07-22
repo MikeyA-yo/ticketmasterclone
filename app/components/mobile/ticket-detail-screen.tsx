@@ -8,7 +8,9 @@ import {
   Tickets,
   EllipsisVertical,
   ArrowUpRight,
+  ArrowUp,
   RefreshCw,
+  ScanBarcode,
   Wallet,
   Info,
   type LucideProps,
@@ -108,14 +110,20 @@ export default function TicketDetailScreen({ order }: { order: TicketOrder }) {
             </p>
             <span className="flex shrink-0 items-center gap-1.5 text-white">
               <Tickets className="h-5 w-5" />
-              <span className="font-bold">{event.count}</span>
+              <span className="font-bold">x{seats.length}</span>
             </span>
           </div>
         </div>
       </div>
 
-      {/* Blue accent bar */}
-      <div className="h-9 w-full bg-tm-blue" />
+      {/* View Tickets bar */}
+      <button
+        type="button"
+        className="flex w-full items-center justify-center gap-2 bg-tm-blue py-3 text-white transition hover:bg-tm-blue-dark"
+      >
+        <ScanBarcode className="h-5 w-5" />
+        <span className="text-[15px] font-bold">View Tickets</span>
+      </button>
 
       {/* Tabs */}
       <div className="flex border-b border-tm-line bg-white">
@@ -142,7 +150,12 @@ export default function TicketDetailScreen({ order }: { order: TicketOrder }) {
           {/* Order header */}
           <div className="mb-3 flex items-start justify-between">
             <div>
-              <h2 className="text-xl font-extrabold text-tm-ink">Order</h2>
+              <h2 className="text-xl font-extrabold text-tm-ink">
+                Order
+                {order.orderNumber && (
+                  <span className="font-bold text-tm-ink-soft"> #{order.orderNumber}</span>
+                )}
+              </h2>
               <p className="text-sm text-tm-ink-soft">x{seats.length} Tickets</p>
             </div>
             <button type="button" aria-label="Order options" className="p-1 text-tm-ink">
@@ -188,12 +201,17 @@ export default function TicketDetailScreen({ order }: { order: TicketOrder }) {
       {/* Floating action bar */}
       <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
         <div className="flex items-center rounded-full bg-white px-1.5 py-2 shadow-pop ring-1 ring-black/5">
-          <button type="button" className="flex flex-col items-center gap-0.5 px-7 text-tm-blue">
+          <button type="button" className="flex flex-col items-center gap-0.5 px-5 text-tm-ink-soft">
+            <ArrowUp className="h-5 w-5" />
+            <span className="text-xs font-semibold">Upgrade</span>
+          </button>
+          <span className="h-9 w-px bg-tm-line" />
+          <button type="button" className="flex flex-col items-center gap-0.5 px-5 text-tm-blue">
             <ArrowUpRight className="h-5 w-5" />
             <span className="text-xs font-semibold">Transfer</span>
           </button>
           <span className="h-9 w-px bg-tm-line" />
-          <button type="button" className="flex flex-col items-center gap-0.5 px-7 text-tm-blue">
+          <button type="button" className="flex flex-col items-center gap-0.5 px-5 text-tm-blue">
             <RefreshCw className="h-5 w-5" />
             <span className="text-xs font-semibold">Sell</span>
           </button>

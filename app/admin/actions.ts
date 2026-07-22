@@ -48,6 +48,7 @@ const seatSchema = z.object({
 const orderSchema = z.object({
   id: z.string().trim().optional(),
   status: z.enum(["upcoming", "past"]),
+  orderNumber: z.string().trim().optional(),
   name: z.string().trim().min(1, "Event name required"),
   date: z.string().trim().min(1, "Date required"),
   venue: z.string().trim().min(1, "Venue required"),
@@ -87,6 +88,7 @@ export async function saveOrder(input: unknown): Promise<SaveResult> {
   const order: TicketOrder = {
     id,
     status: d.status,
+    orderNumber: d.orderNumber || undefined,
     event: {
       name: d.name,
       date: d.date,

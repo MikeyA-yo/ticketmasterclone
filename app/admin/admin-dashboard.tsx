@@ -10,6 +10,7 @@ type SeatForm = { type: string; section: string; row: string; seat: string; pric
 type OrderForm = {
   id: string;
   status: "upcoming" | "past";
+  orderNumber: string;
   name: string;
   date: string;
   venue: string;
@@ -25,6 +26,7 @@ const blankSeat = (): SeatForm => ({ type: "Standard", section: "", row: "", sea
 const blankForm = (): OrderForm => ({
   id: "",
   status: "upcoming",
+  orderNumber: "",
   name: "",
   date: "",
   venue: "",
@@ -39,6 +41,7 @@ function orderToForm(o: TicketOrder): OrderForm {
   return {
     id: o.id,
     status: o.status,
+    orderNumber: o.orderNumber ?? "",
     name: o.event.name,
     date: o.event.date,
     venue: o.event.venue,
@@ -100,6 +103,7 @@ export default function AdminDashboard({
     const input = {
       id: editingId || undefined,
       status: form.status,
+      orderNumber: form.orderNumber || undefined,
       name: form.name,
       date: form.date,
       venue: form.venue,
@@ -207,10 +211,14 @@ export default function AdminDashboard({
             <input className={inputCls} value={form.image} onChange={(e) => set("image", e.target.value)} placeholder="https://… or /images/ariana.jpg" />
           </div>
           <div>
+            <label className={labelCls}>Order number (optional)</label>
+            <input className={inputCls} value={form.orderNumber} onChange={(e) => set("orderNumber", e.target.value)} placeholder="75-19711/NY2" />
+          </div>
+          <div>
             <label className={labelCls}>Header count badge</label>
             <input className={inputCls} type="number" value={form.count} onChange={(e) => set("count", e.target.value)} />
           </div>
-          <div>
+          <div className="sm:col-span-2">
             <label className={labelCls}>Transfer status (optional)</label>
             <input className={inputCls} value={form.transferStatus} onChange={(e) => set("transferStatus", e.target.value)} placeholder="Transfer Accepted" />
           </div>
